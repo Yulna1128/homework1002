@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>商品訂購系統</title>
+  <style>
+    body {
+      font-family: Arial, "Microsoft JhengHei", sans-serif;
+      margin: 20px;
+    }
+    h2 {
+      margin-top: 30px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid #666;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    .form-section {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: inline-block;
+      width: 120px;
+    }
+    input[type="text"], input[type="email"], textarea, select {
+      width: 60%;
+      padding: 5px;
+      margin: 5px 0;
+    }
+    textarea {
+      height: 60px;
+    }
+    .btn {
+      padding: 8px 15px;
+      margin: 10px 5px;
+      border: none;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #555;
+    }
+    .total-box {
+      font-size: 18px;
+      font-weight: bold;
+      color: #d9534f;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>商品資訊</h2>
+  <h3>本月特惠商品</h3>
+  <table>
+    <tr>
+      <th>商品編號</th>
+      <th>商品名稱</th>
+      <th>規格</th>
+      <th>原價</th>
+      <th>特價</th>
+      <th>庫存</th>
+      <th>評價</th>
+    </tr>
+    <tr>
+      <td>P101</td>
+      <td>無線滑鼠</td>
+      <td>2.4GHz / 黑色</td>
+      <td>$799</td>
+      <td>$599</td>
+      <td>40</td>
+      <td>★★★★☆</td>
+    </tr>
+    <tr>
+      <td>P102</td>
+      <td>吹風機</td>
+      <td>1800W / 粉色</td>
+      <td>$1,500</td>
+      <td>$1,099</td>
+      <td>15</td>
+      <td>★★★☆☆</td>
+    </tr>
+    <tr>
+      <td>P103</td>
+      <td>電熱水壺</td>
+      <td>1.5L / 不鏽鋼</td>
+      <td>$1,200</td>
+      <td>$899</td>
+      <td>22</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>P104</td>
+      <td>藍牙喇叭</td>
+      <td>10W / 黑色</td>
+      <td>$2,000</td>
+      <td>$1,580</td>
+      <td>18</td>
+      <td>★★★☆☆</td>
+    </tr>
+    <tr>
+      <td>P105</td>
+      <td>電子體重計</td>
+      <td>藍牙連線 / 白色</td>
+      <td>$1,299</td>
+      <td>$999</td>
+      <td>12</td>
+      <td>★★★★☆</td>
+    </tr>
+  </table>
+
+  <h2>訂購表單</h2>
+  <form method="post" action="order.php">
+    <div class="form-section">
+      <h3>商品選擇</h3>
+      <label><input type="checkbox" name="product[]" value="P101" data-price="599"> 無線滑鼠 – $599</label>
+      數量：<input type="number" name="qtyP101" value="1" min="1"><br>
+
+      <label><input type="checkbox" name="product[]" value="P102" data-price="1099"> 吹風機 – $1,099</label>
+      數量：<input type="number" name="qtyP102" value="1" min="1"><br>
+
+      <label><input type="checkbox" name="product[]" value="P103" data-price="899"> 電熱水壺 – $899</label>
+      數量：<input type="number" name="qtyP103" value="1" min="1"><br>
+
+      <label><input type="checkbox" name="product[]" value="P104" data-price="1580"> 藍牙喇叭 – $1,580</label>
+      數量：<input type="number" name="qtyP104" value="1" min="1"><br>
+
+      <label><input type="checkbox" name="product[]" value="P105" data-price="999"> 電子體重計 – $999</label>
+      數量：<input type="number" name="qtyP105" value="1" min="1"><br>
+    </div>
+
+    <div class="form-section">
+      <h3>收件人資訊</h3>
+      <label>收件人姓名：</label><input type="text" name="name"><br>
+      <label>收件人電話：</label><input type="text" name="phone" placeholder="09xx-xxx-xxx"><br>
+      <label>電子郵件：</label><input type="email" name="email"><br>
+      <label>收件地址：</label><br>
+      <textarea name="address" placeholder="請輸入完整地址"></textarea>
+    </div>
+
+    <div class="form-section">
+      <h3>配送選項</h3>
+      <label><input type="radio" name="shipping" value="0" checked> 標準配送 (3-5個工作天) – 免費</label><br>
+      <label><input type="radio" name="shipping" value="100"> 快速配送 (1-2個工作天) – $100</label><br>
+      <label><input type="radio" name="shipping" value="200"> 隔夜配送 (次日到達) – $200</label><br>
+      <label>希望配送時間：</label>
+      <select name="time">
+        <option>不指定</option>
+        <option>上午</option>
+        <option>下午</option>
+        <option>晚上</option>
+      </select>
+    </div>
+
+    <div class="form-section">
+      <h3>付款方式</h3>
+      <label><input type="radio" name="payment" value="credit" checked> 信用卡付款</label><br>
+      <label><input type="radio" name="payment" value="atm"> ATM 轉帳</label><br>
+      <label><input type="radio" name="payment" value="cod"> 貨到付款</label>
+    </div>
+
+    <div class="form-section">
+      <h3>其他資訊</h3>
+      <label>優惠券代碼：</label><input type="text" name="coupon"><br>
+      <label>訂單備註：</label><br>
+      <textarea name="note" placeholder="有任何特殊需求請在此說明..."></textarea><br>
+      <input type="checkbox" name="subscribe"> 我希望收到最新商品資訊及優惠訊息<br>
+      <input type="checkbox" name="agree" required> 我已閱讀並同意 <a href="#">購物條款</a> 和 <a href="#">隱私政策</a>
+    </div>
+
+    <button type="submit" class="btn">確認訂購</button>
+    <button type="reset" class="btn">清除表單</button>
+    <button type="button" class="btn" onclick="calcTotal()">計算總額</button>
+
+    <div id="totalAmount" class="total-box"></div>
+  </form>
+
+  <script>
+    function calcTotal() {
+      let total = 0;
+
+      // 商品計算
+      document.querySelectorAll('input[type="checkbox"][name="product[]"]:checked').forEach(item => {
+        let price = parseInt(item.dataset.price);
+        let qtyInput = document.querySelector(`input[name="qty${item.value}"]`);
+        let qty = parseInt(qtyInput.value) || 1;
+        total += price * qty;
+      });
+
+      // 配送費
+      let shipping = parseInt(document.querySelector('input[name="shipping"]:checked').value);
+      total += shipping;
+
+      document.getElementById("totalAmount").innerText = "訂單總額：$" + total.toLocaleString();
+    }
+  </script>
+</body>
+</html>
